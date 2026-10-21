@@ -1,0 +1,55 @@
+:root {
+  --fundo: #e9eef5; --tinta: #14213d; --suave: #52607a; --papel: #fff;
+  --borda: #c9d3e2; --azul: #1d4ed8; --vermelho: #d64045;
+  --erro: #a4161a; --erro-fundo: #fde8e8; --ok: #166534; --ok-fundo: #e3f5e9;
+  --titulo: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --corpo: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--corpo); color: var(--tinta); background: var(--fundo); line-height: 1.5; }
+header, main, footer { max-width: 1040px; margin: 0 auto; padding: 1.25rem; }
+h1 { font-family: var(--titulo); font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.1; margin: 1.5rem 0 .5rem; max-width: 16ch; }
+h2 { font-family: var(--titulo); font-size: 1.25rem; margin: 0 0 1rem; }
+header p { margin: 0; color: var(--suave); max-width: 50ch; }
+main { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+
+.cartao { background: var(--papel); border-radius: 14px; padding: 1.5rem; box-shadow: 0 1px 0 var(--borda), 0 12px 30px -18px rgba(20,33,61,.45); }
+form { display: grid; gap: 1rem; }
+label { display: grid; gap: .3rem; font-weight: 600; font-size: .92rem; }
+input { font: inherit; font-weight: 400; padding: .7rem .8rem; border: 1.5px solid var(--borda); border-radius: 8px; width: 100%; color: var(--tinta); }
+input[readonly] { background: #f1f4f9; color: var(--suave); }
+input.invalido { border-color: var(--erro); }
+input:focus-visible, button:focus-visible { outline: 3px solid #93b4ff; outline-offset: 2px; }
+.linha-cep { display: flex; gap: .5rem; }
+.linha-cep input { font-size: 1.1rem; letter-spacing: .08em; }
+.duas { display: grid; grid-template-columns: 1fr 5.5rem; gap: .75rem; }
+
+button { font: inherit; font-weight: 700; padding: 0 1.2rem; min-width: 8.5rem; border: 0; border-radius: 8px; background: var(--azul); color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; }
+button:hover:not(:disabled) { background: #1e40af; }
+button:disabled { opacity: .75; cursor: progress; }
+.salvar { padding: .8rem 1.2rem; background: var(--tinta); }
+.salvar:hover:not(:disabled) { background: #0b1326; }
+.spinner { width: 1rem; height: 1rem; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: gira .7s linear infinite; display: none; }
+button.carregando .spinner { display: inline-block; }
+@keyframes gira { to { transform: rotate(360deg); } }
+
+#mensagem { border-radius: 8px; font-size: .93rem; }
+#mensagem:empty { display: none; }
+#mensagem.erro { background: var(--erro-fundo); color: var(--erro); padding: .65rem .85rem; }
+#mensagem.sucesso { background: var(--ok-fundo); color: var(--ok); padding: .65rem .85rem; }
+#mensagem.info { color: var(--suave); }
+
+.vazio { color: var(--suave); margin: 0; }
+.lista { display: grid; gap: 1.1rem; }
+.etiqueta { position: relative; background: var(--papel); border: 2px dashed var(--tinta); border-radius: 6px; padding: 1.9rem 1.25rem 1.1rem; overflow: hidden; box-shadow: 0 14px 26px -20px rgba(20,33,61,.6); }
+.etiqueta::before { content: ""; position: absolute; inset: 0 0 auto 0; height: .7rem;
+  background: repeating-linear-gradient(-45deg, var(--azul) 0 14px, #fff 14px 22px, var(--vermelho) 22px 36px, #fff 36px 44px); }
+.etiqueta h3 { font-family: var(--titulo); font-size: 1.2rem; margin: 0 0 .25rem; }
+.etiqueta p { margin: 0; }
+.etiqueta .cep { font-family: var(--titulo); font-size: 1.5rem; letter-spacing: .06em; margin-top: .5rem; }
+.etiqueta .remover { margin-top: .8rem; min-width: 0; padding: .35rem .8rem; background: transparent; color: var(--erro); border: 1.5px solid var(--erro); font-size: .85rem; }
+.etiqueta .remover:hover { background: var(--erro-fundo) !important; }
+footer { color: var(--suave); font-size: .85rem; padding-bottom: 2rem; }
+
+@media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .duas { grid-template-columns: 1fr; } .linha-cep { flex-direction: column; } button { padding: .75rem 1rem; } }
